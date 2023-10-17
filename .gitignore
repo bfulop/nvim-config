@@ -1,0 +1,5 @@
+# initialise a gitignore file with the usual ignore list for macos
+.DS_Store
+
+
+
