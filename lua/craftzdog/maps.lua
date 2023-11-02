@@ -42,19 +42,19 @@ keymap.set('n', '<C-g><C-]>', ':GonvimWorkspaceNext<CR>')
 keymap.set('n', '<C-g><C-n>', ':GonvimWorkspaceNew<CR>')
 
 -- Highlight word toggle
-vim.api.nvim_set_keymap("n", "<leader>m", ":HiMyWordsToggle<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-m>", ":HiMyWordsClear<CR>", { noremap = true })
+keymap.set("n", "<leader>m", ":HiMyWordsToggle<CR>", { noremap = true })
+keymap.set("n", "<leader><C-m>", ":HiMyWordsClear<CR>", { noremap = true })
 
 -- Neon tree
-vim.keymap.set('n', '<leader>no', ':NeoTreeShow<CR>')
-vim.keymap.set('n', '<leader>nw', ':NeoTreeClose<CR>')
+keymap.set('n', '<leader>no', ':NeoTreeShow<CR>')
+keymap.set('n', '<leader>nw', ':NeoTreeClose<CR>')
 
 
 -- Trouble
 
-vim.keymap.set('n', '<leader>a', '<Cmd>TroubleToggle<CR>', opts)
-vim.keymap.set('n', 'gl', '<Cmd>TroubleToggle document_diagnostics<CR>', opts)
-vim.keymap.set('n', 'gd', '<Cmd>TroubleToggle lsp_references<CR>', opts)
+keymap.set('n', '<leader>a', '<Cmd>TroubleToggle<CR>', opts)
+keymap.set('n', 'gl', '<Cmd>TroubleToggle document_diagnostics<CR>', opts)
+keymap.set('n', 'gd', '<Cmd>TroubleToggle lsp_references<CR>', opts)
 -- Go to definition
-vim.keymap.set("n", "gi", "<cmd>TroubleToggle lsp_definitions<CR>")
-vim.keymap.set("n", "gt", "<cmd>TroubleToggle lsp_type_definitions<CR>")
+keymap.set("n", "gi", "<cmd>TroubleToggle lsp_definitions<CR>")
+keymap.set("n", "gt", "<cmd>TroubleToggle lsp_type_definitions<CR>")

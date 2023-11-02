@@ -219,8 +219,17 @@ leaf.setup({
     TSDefinitionUsage       = { bg = colors.light_dimmest },
 
     -- GitSigns
-    GitSignsAdd             = { fg = colors.light_dimmer },
-    GitSignsChange          = { fg = colors.light_dimmer },
+    GitSignsAdd             = { fg = colors.light_dimmest },
+    GitSignsChange          = { fg = colors.light_dimmest },
+
+    -- nvim-cmp
+    CmpItemKind             = { fg = colors.blue_light },
+    CmpItemMenuDefault      = { fg = colors.blue_light },
+    CmpItemAbbrMatch        = { fg = colors.magenta, bold = true },
+    CmpItemAbbrMatchFuzzy   = { link = 'CmpItemAbbrMatch' },
+    CmpItemAbbrDeprecated   = { fg = colors.red_soft },
+
+
   },
   theme = "auto",   -- default, based on vim.o.background, alternatives: "light", "dark"
   contrast = "low", -- default, alternatives: "medium", "high"
