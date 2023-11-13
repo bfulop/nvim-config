@@ -225,7 +225,7 @@ leaf.setup({
     -- nvim-cmp
     CmpItemKind             = { fg = colors.blue_light },
     CmpItemMenuDefault      = { fg = colors.blue_light },
-    CmpItemAbbrMatch        = { fg = colors.magenta, bold = true },
+    CmpItemAbbrMatch        = { fg = colors.purple, bold = true },
     CmpItemAbbrMatchFuzzy   = { link = 'CmpItemAbbrMatch' },
     CmpItemAbbrDeprecated   = { fg = colors.red_soft },
 

@@ -85,6 +85,16 @@ packer.startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
+  -- Packer
+  use "sindrets/diffview.nvim"
+  use {
+    'harrisoncramer/gitlab.nvim',
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim"
+    },
+    run = function() require("gitlab.server").build(true) end,
+  }
 end)
 
 require('Comment').setup()
@@ -101,7 +111,7 @@ require("neo-tree").setup({
   -- sources = { "document_symbols" },
   default_component_configs = {
     indent = {
-      indent_size = 1,
+      indent_size = 2,
       with_markers = false,
     }
   },
@@ -116,7 +126,7 @@ require("neo-tree").setup({
   },
   window = {
     position = "right",
-    width = 40,
+    width = 50,
   }
 })
 require('tsc').setup({
@@ -145,3 +155,44 @@ require("typescript-tools").setup {
     tsserver_file_preferences = {},
   },
 }
+
+require("gitlab").setup({
+  port = nil,                                               -- The port of the Go server, which runs in the background, if omitted or `nil` the port will be chosen automatically
+  log_path = vim.fn.stdpath("cache") .. "/gitlab.nvim.log", -- Log path for the Go server
+  debug = { go_request = false, go_response = false },      -- Which values to log
+  reviewer = "diffview",                                    -- The reviewer type ("delta" or "diffview")
+  attachment_dir = nil,                                     -- The local directory for files (see the "summary" section)
+  popup = {
+    -- The popup for comment creation, editing, and replying
+    exit = "<Esc>",
+    perform_action = "<leader>s",          -- Once in normal mode, does action (like saving comment or editing description, etc)
+    perform_linewise_action = "<leader>l", -- Once in normal mode, does the linewise action (see logs for this job, etc)
+  },
+  discussion_tree = {
+    -- The discussion tree that holds all comments
+    blacklist = {},         -- List of usernames to remove from tree (bots, CI, etc)
+    jump_to_file = "o",     -- Jump to comment location in file
+    jump_to_reviewer = "m", -- Jump to the location in the reviewer window
+    edit_comment = "e",     -- Edit coment
+    delete_comment = "dd",  -- Delete comment
+    reply = "r",            -- Reply to comment
+    toggle_node = "t",      -- Opens or closes the discussion
+    toggle_resolved = "p",  -- Toggles the resolved status of the discussion
+    position = "left",      -- "top", "right", "bottom" or "left"
+    size = "20%",           -- Size of split
+    relative = "editor",    -- Position of tree split relative to "editor" or "window"
+    resolved = '✓',       -- Symbol to show next to resolved discussions
+    unresolved = '✖',     -- Symbol to show next to unresolved discussions
+  },
+  pipeline = {
+    created = "",
+    pending = "",
+    preparing = "",
+    scheduled = "",
+    running = "ﰌ",
+    canceled = "ﰸ",
+    skipped = "ﰸ",
+    success = "✓",
+    failed = "",
+  },
+})
