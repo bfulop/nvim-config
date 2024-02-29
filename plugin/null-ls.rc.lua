@@ -2,7 +2,6 @@ local status, null_ls = pcall(require, "null-ls")
 if (not status) then return end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
     filter = function(client)
@@ -12,22 +11,26 @@ local lsp_formatting = function(bufnr)
   })
 end
 
+local eslint = require('none-ls.diagnostics.eslint_d').with({
+  diagnostics_format = '[eslint] #{m}\n(#{c})',
+  diagnostic_config = {
+    virtual_text = false,
+  }
+})
+local eslintActions = require('none-ls.code_actions.eslint_d')
+
 -- register any number of sources simultaneously
 local sources = {
-  -- require("typescript.extensions.null-ls.code-actions"),
+  eslint,
+  eslintActions,
   null_ls.builtins.formatting.prettierd.with({
     diagnostic_config = {
       virtual_text = false,
     }
   }),
   null_ls.builtins.completion.spell,
-  null_ls.builtins.diagnostics.eslint_d.with({
-    diagnostics_format = '[eslint] #{m}\n(#{c})',
-    diagnostic_config = {
-      virtual_text = false,
-    }
-  }),
 }
+
 
 null_ls.setup { sources = {
   sources = vim.tbl_map(function(source)
@@ -56,10 +59,10 @@ null_ls.setup { sources = {
   end
 }
 
-vim.api.nvim_create_user_command(
-  'DisableLspFormatting',
-  function()
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
-  end,
-  { nargs = 0 }
-)
+-- vim.api.nvim_create_user_command(
+--   'DisableLspFormatting',
+--   function()
+--     vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
+--   end,
+--   { nargs = 0 }
+-- )
