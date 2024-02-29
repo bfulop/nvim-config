@@ -99,3 +99,5 @@ vim.keymap.set("n", "sf", function()
     initial_mode = "normal",
   })
 end)
+
+vim.keymap.set('n', '<Leader>se', ':Telescope persisted<CR>', { noremap = true })

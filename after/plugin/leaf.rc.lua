@@ -39,7 +39,7 @@ local colors = {
 }
 
 leaf.setup({
-  underlineStyle = "underdotted",
+  underlineStyle = "underline",
   commentStyle = "italic",
   functionStyle = "NONE",
   keywordStyle = "bold",
@@ -81,7 +81,7 @@ leaf.setup({
     Visual                  = { bg = colors.red_light },
     Comment                 = { fg = colors.light_dimmer, style = "italic" },
     Cursor                  = { bg = "#DC7786" },
-    CursorLine              = { bg = "#e9e7e5" },
+    CursorLine              = { bg = "#E9E7E4" },
     WinSeparator            = { fg = colors.light, bg = colors.bg_normal, style = "NONE" },
     MatchParen              = { fg = colors.red_hard, style = "bold" },
     SpellBad                = { guisp = colors.light_dim, },
@@ -228,6 +228,11 @@ leaf.setup({
     CmpItemAbbrMatch        = { fg = colors.purple, bold = true },
     CmpItemAbbrMatchFuzzy   = { link = 'CmpItemAbbrMatch' },
     CmpItemAbbrDeprecated   = { fg = colors.red_soft },
+
+    -- SourceGraph Cody
+    CmpItemKindCody         = { fg = colors.magenta },
+    CmpItemKindCodyDefault  = { fg = colors.magenta },
+
 
 
   },
