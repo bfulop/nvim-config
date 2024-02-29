@@ -91,16 +91,6 @@ packer.startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
-  -- Packer
-  use "sindrets/diffview.nvim"
-  use {
-    'harrisoncramer/gitlab.nvim',
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim"
-    },
-    run = function() require("gitlab.server").build(true) end,
-  }
 end)
 
 require('Comment').setup()
