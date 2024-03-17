@@ -21,7 +21,7 @@ local eslintActions = require('none-ls.code_actions.eslint_d')
 
 -- register any number of sources simultaneously
 local sources = {
-  eslint,
+  -- eslint,
   eslintActions,
   null_ls.builtins.formatting.prettierd.with({
     diagnostic_config = {

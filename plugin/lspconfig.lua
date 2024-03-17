@@ -130,15 +130,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-nvim_lsp.eslint.setup({
-  --- ...
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
+-- nvim_lsp.eslint.setup({
+--   --- ...
+--   on_attach = function(client, bufnr)
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+-- })
 
 
 

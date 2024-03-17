@@ -14,7 +14,7 @@ telescope.setup {
   tiebreak = function() return false end,
   defaults = {
     border = true,
-    winblend = 7,
+    winblend = 9,
     path_display = {
       truncate = 2
     },
