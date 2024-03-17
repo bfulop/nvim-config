@@ -3,6 +3,7 @@ let $PATH=$PATH.':/Users/balint.fulop/.fnm/aliases/default/bin:/opt/homebrew/bin
 ]])
 
 vim.g.background = 'light'
+vim.g.backupcopy = 'yes'
 
 require('craftzdog.base')
 require('craftzdog.highlights')
