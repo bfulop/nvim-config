@@ -238,6 +238,10 @@ leaf.setup({
     CmpItemKindCody         = { fg = colors.magenta },
     CmpItemKindCodyDefault  = { fg = colors.magenta },
 
+    -- NeoTree
+    NeoTreeFileName         = { fg = colors.dark_dim, bold = false },
+    NeoTreeCursorLine       = { bold = true, fg = colors.purple_dark, },
+
 
 
   },
