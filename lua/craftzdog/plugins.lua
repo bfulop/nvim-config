@@ -27,7 +27,7 @@ packer.startup(function(use)
     "pmizio/typescript-tools.nvim",
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   }
-  use 'dmmulroy/tsc.nvim'
+  -- use 'dmmulroy/tsc.nvim'
   -- Lua
   use {
     "folke/trouble.nvim",
@@ -48,10 +48,20 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
-  use { 'numToStr/Comment.nvim',
+  use {
+    "jellydn/typecheck.nvim",
     requires = {
-      'JoosepAlviste/nvim-ts-context-commentstring'
-    }
+      { "folke/trouble.nvim", requires = { "nvim-tree/nvim-web-devicons" } }
+    },
+    ft = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
+    config = function()
+      require("typecheck").setup {
+        debug = true,
+        mode = "trouble", -- "quickfix" | "trouble"
+      }
+      vim.api.nvim_set_keymap("n", "<leader>ck", "<cmd>Typecheck<cr>",
+        { noremap = true, silent = true, desc = "Run Type Check" })
+    end
   }
   use 'norcalli/nvim-colorizer.lua'
   use({
@@ -69,17 +79,6 @@ packer.startup(function(use)
   use 'ziontee113/neo-minimap'
   -- For session management
   use 'olimorris/persisted.nvim'
-  use 'ahmedkhalf/project.nvim'
-  -- JSDoc comment
-  -- use {
-  --   "danymat/neogen",
-  --   config = function()
-  --     require('neogen').setup({})
-  --   end,
-  --   requires = "nvim-treesitter/nvim-treesitter",
-  --   -- Uncomment next line if you want to follow only stable versions
-  --   -- tag = "*"
-  -- }
   use 'Exafunction/codeium.vim'
   use 'stevearc/oil.nvim'
   use {
@@ -93,7 +92,7 @@ packer.startup(function(use)
   }
 end)
 
-require('Comment').setup()
+-- require('Comment').setup()
 require("persisted").setup({ silent = false, use_git_branch = true })
 require("telescope").load_extension("persisted") -- To load the telescope extension
 -- require('mini.animate').setup()
@@ -125,12 +124,6 @@ require("neo-tree").setup({
     width = 50,
   }
 })
-require('tsc').setup({
-  flags = {
-    skipLibCheck = true
-  }
-})
-
 
 require("typescript-tools").setup {
   settings = {
@@ -151,3 +144,8 @@ require("typescript-tools").setup {
     tsserver_file_preferences = {},
   },
 }
+
+-- require('typecheck').setup {
+--   debug = true,
+--   mode = "trouble", -- "quickfix" | "trouble"
+-- }
