@@ -59,6 +59,8 @@ vim.opt.formatoptions:append { 'r' }
 vim.g.background = 'light'
 vim.opt.signcolumn = 'yes'
 
+-- Disable Codeium
+vim.g.codeium_enabled = false
 
 -- Neovide
 if vim.fn.exists("g:neovide") then
