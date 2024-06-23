@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1713773202/share/lua/5.1/?/init.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1713773202/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1713773202/lib/lua/5.1/?.so"
+local package_path_str = "/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?/init.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?.lua;/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/balint.fulop/.cache/nvim/packer_hererocks/2.1.1716656478/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -254,8 +254,13 @@ _G.packer_plugins = {
     path = "/Users/balint.fulop/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  ["tsc.nvim"] = {
+    loaded = true,
+    path = "/Users/balint.fulop/.local/share/nvim/site/pack/packer/start/tsc.nvim",
+    url = "https://github.com/dmmulroy/tsc.nvim"
+  },
   ["typecheck.nvim"] = {
-    config = { "\27LJ\2\nR\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\ndebug\1\tmode\ftrouble\nsetup\14typecheck\frequire\0" },
+    config = { "\27LJ\2\n“\1\0\0\6\0\v\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\1K\0\1\0\1\0\3\fnoremap\2\vsilent\2\tdesc\19Run Type Check\23<cmd>Typecheck<cr>\15<leader>ck\6n\20nvim_set_keymap\bapi\bvim\1\0\2\ndebug\2\tmode\ftrouble\nsetup\14typecheck\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -274,12 +279,12 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType jsonc ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "jsonc" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascript ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescript ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "typescript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType json ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "json" }, _G.packer_plugins)]]
+vim.cmd [[au FileType jsonc ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "jsonc" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'typecheck.nvim'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 

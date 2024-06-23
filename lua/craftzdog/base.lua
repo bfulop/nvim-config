@@ -59,12 +59,21 @@ vim.opt.formatoptions:append { 'r' }
 vim.g.background = 'light'
 vim.opt.signcolumn = 'yes'
 
--- Disable Codeium
-vim.g.codeium_enabled = false
-
 -- Neovide
 if vim.fn.exists("g:neovide") then
   vim.g.neovide_scroll_animation_length = 0
   vim.g.neovide_cursor_trail_size = 0
 end
 vim.g.background = 'light'
+
+
+
+local group = vim.api.nvim_create_augroup('SetVirtualEditNone', { clear = true })
+
+-- For consistent cursor movements
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = group,
+  callback = function()
+    vim.opt.virtualedit = 'none'
+  end,
+})

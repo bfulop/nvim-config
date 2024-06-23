@@ -6,17 +6,27 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
+local function is_not_vscode()
+  return not vim.g.vscode
+end
+
+
+
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'nvim-lua/plenary.nvim'     -- Common utilities
-  use 'onsails/lspkind-nvim'      -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer'        -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp'      -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp'          -- Completion
-  use 'neovim/nvim-lspconfig'     -- LSP
-  use 'nvimtools/none-ls-extras.nvim'
+  use { 'nvim-lualine/lualine.nvim', cond = is_not_vscode } -- Statusline
+  use { 'nvim-lua/plenary.nvim', cond = is_not_vscode }     -- Common utilities
+  use { 'onsails/lspkind-nvim', cond = is_not_vscode }      -- vscode-like pictograms
+  use { 'hrsh7th/cmp-buffer', cond = is_not_vscode }        -- nvim-cmp source for buffer words
+  use { 'hrsh7th/cmp-nvim-lsp', cond = is_not_vscode }      -- nvim-cmp source for neovim's built-in LSP
+  use { 'hrsh7th/nvim-cmp', cond = is_not_vscode }          -- Completion
+  use {
+    'neovim/nvim-lspconfig',
+    cond = is_not_vscode,
+  }
+  use { 'nvimtools/none-ls-extras.nvim', cond = is_not_vscode }
   use { 'nvimtools/none-ls.nvim',
+    cond = is_not_vscode,
     requires = {
       "nvim-lua/plenary.nvim",
       "nvimtools/none-ls-extras.nvim",
@@ -25,35 +35,39 @@ packer.startup(function(use)
   -- use 'jose-elias-alvarez/typescript.nvim'
   use {
     "pmizio/typescript-tools.nvim",
+    cond = is_not_vscode,
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   }
-  -- use 'dmmulroy/tsc.nvim'
+  use { 'dmmulroy/tsc.nvim', cond = is_not_vscode }
   -- Lua
   use {
     "folke/trouble.nvim",
+    cond = is_not_vscode,
   }
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'daschw/leaf.nvim'
-  use 'RRethy/nvim-treesitter-textsubjects'
-  use 'echasnovski/mini.nvim'
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
-  use 'L3MON4D3/LuaSnip'
+  use { 'williamboman/mason.nvim', cond = is_not_vscode }
+  use { 'williamboman/mason-lspconfig.nvim', cond = is_not_vscode }
+  use { 'daschw/leaf.nvim'}
+  use { 'RRethy/nvim-treesitter-textsubjects', cond = is_not_vscode }
+  use { 'echasnovski/mini.nvim', cond = is_not_vscode }
+  use { 'glepnir/lspsaga.nvim', cond = is_not_vscode } -- LSP UIs
+  use { 'L3MON4D3/LuaSnip', cond = is_not_vscode }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
+    cond = is_not_vscode
   }
-  use 'nvim-tree/nvim-web-devicons' -- File icons
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
+  use { 'nvim-tree/nvim-web-devicons', cond = is_not_vscode } -- File icons
+  use { 'nvim-telescope/telescope.nvim', cond = is_not_vscode }
+  use { 'nvim-telescope/telescope-file-browser.nvim', cond = is_not_vscode }
+  use { 'windwp/nvim-autopairs', cond = is_not_vscode }
+  use { 'windwp/nvim-ts-autotag', cond = is_not_vscode }
   use {
     "jellydn/typecheck.nvim",
     requires = {
       { "folke/trouble.nvim", requires = { "nvim-tree/nvim-web-devicons" } }
     },
     ft = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
+    cond = is_not_vscode,
     config = function()
       require("typecheck").setup {
         debug = true,
@@ -63,26 +77,28 @@ packer.startup(function(use)
         { noremap = true, silent = true, desc = "Run Type Check" })
     end
   }
-  use 'norcalli/nvim-colorizer.lua'
+  use { 'norcalli/nvim-colorizer.lua', cond = is_not_vscode }
   use({
     "iamcco/markdown-preview.nvim",
+    cond = is_not_vscode,
     run = function() vim.fn["mkdp#util#install"]() end,
   })
-  use 'akinsho/nvim-bufferline.lua'
+  use { 'akinsho/nvim-bufferline.lua', cond = is_not_vscode }
   -- highlight words
-  use 'dvoytik/hi-my-words.nvim'
+  use { 'dvoytik/hi-my-words.nvim', cond = is_not_vscode }
   -- use 'github/copilot.vim'
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
+  use { 'lewis6991/gitsigns.nvim', cond = is_not_vscode }
+  use { 'dinhhuy258/git.nvim', cond = is_not_vscode } -- For git blame & browse
   -- minimap
-  use 'ziontee113/neo-minimap'
+  use { 'ziontee113/neo-minimap', cond = is_not_vscode }
   -- For session management
-  use 'olimorris/persisted.nvim'
-  use 'Exafunction/codeium.vim'
-  use 'stevearc/oil.nvim'
+  use { 'olimorris/persisted.nvim', cond = is_not_vscode }
+  use { 'Exafunction/codeium.vim', cond = is_not_vscode }
+  use { 'stevearc/oil.nvim', cond = is_not_vscode }
   use {
     "nvim-neo-tree/neo-tree.nvim",
+    cond = is_not_vscode,
     branch = "v2.x",
     requires = {
       "nvim-lua/plenary.nvim",
@@ -144,6 +160,13 @@ require("typescript-tools").setup {
     tsserver_file_preferences = {},
   },
 }
+
+require('tsc').setup({
+  flags = {
+    skipLibCheck = true,
+    use_trouble_qflist = true,
+  }
+})
 
 -- require('typecheck').setup {
 --   debug = true,

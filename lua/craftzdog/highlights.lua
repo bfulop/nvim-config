@@ -1,8 +1,8 @@
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
-vim.opt.winblend = 8
+vim.opt.winblend = 11
 vim.opt.wildoptions = 'pum'
-vim.opt.pumblend = 8
+vim.opt.pumblend = 11
 vim.opt.background = 'light'
 -- vim.opt.background = 'dark'
 

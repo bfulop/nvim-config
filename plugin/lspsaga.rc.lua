@@ -5,7 +5,7 @@ saga.setup({
   ui = {
     title = false,
     border = 'solid',
-    winblend = 12,
+    winblend = 15,
     kind = {
       Folder = { '' },
       File = { ' ', "@comment" },

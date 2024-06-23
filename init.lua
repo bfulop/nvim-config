@@ -5,9 +5,11 @@ let $PATH=$PATH.':/Users/balint.fulop/.fnm/aliases/default/bin:/opt/homebrew/bin
 vim.g.background = 'light'
 vim.opt.backupcopy = 'yes'
 
-require('craftzdog.base')
+if not vim.g.vscode then
 require('craftzdog.highlights')
-require('craftzdog.maps')
+  require('craftzdog.base')
+  require('craftzdog.maps')
+end
 require('craftzdog.plugins')
 
 local has = function(x)
