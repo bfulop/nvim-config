@@ -1,30 +1,18 @@
-vim.cmd([[
-let $PATH=$PATH.':/Users/balint.fulop/.fnm/aliases/default/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/laps'
-]])
+-- Put this at the top of 'init.lua'
+local path_package = vim.fn.stdpath('data') .. '/site'
+local mini_path = path_package .. '/pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    -- Uncomment next line to use 'stable' branch
+    -- '--branch', 'stable',
+    'https://github.com/echasnovski/mini.nvim', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
+end
 
-vim.g.background = 'light'
-vim.opt.backupcopy = 'yes'
 
-if not vim.g.vscode then
-require('craftzdog.highlights')
-  require('craftzdog.base')
-  require('craftzdog.maps')
-end
-require('craftzdog.plugins')
-
-local has = function(x)
-  return vim.fn.has(x) == 1
-end
-local is_mac = has "macunix"
-local is_win = has "win32"
-local is_wsl = has "wsl"
-
-if is_mac then
-  require('craftzdog.macos')
-end
-if is_win then
-  require('craftzdog.windows')
-end
-if is_wsl then
-  require('craftzdog.wsl')
-end
+require('mini.ai').setup()
+require('mini.surround').setup()
