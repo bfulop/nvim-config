@@ -16,3 +16,8 @@ end
 
 require('mini.ai').setup()
 require('mini.surround').setup()
+
+
+
+vim.o.ignorecase = true
+vim.o.smartcase = true
