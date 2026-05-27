@@ -1,11 +1,12 @@
--- TypeScript + ESLint LSP ----------------------------------------------------
--- Install the servers outside Neovim, for example:
---   npm install -g @typescript/native-preview vscode-langservers-extracted
--- or add them to your project devDependencies:
---   npm install -D @typescript/native-preview vscode-langservers-extracted
+-- TypeScript LSP -------------------------------------------------------------
+-- Install the server outside Neovim, for example:
+--   npm install -g @typescript/native-preview
+-- or add it to your project devDependencies:
+--   npm install -D @typescript/native-preview
 --
 -- To go back to the classic TypeScript language server, change this to 'ts_ls'
 -- and install: npm install -g typescript typescript-language-server
+
 local typescript_lsp = 'tsgo'
 
 vim.diagnostic.config({
@@ -49,6 +50,7 @@ vim.lsp.config('tsgo', {
 
     return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
   end,
+
   filetypes = js_ts_filetypes,
   root_markers = tsgo_root_markers,
 })
@@ -64,34 +66,7 @@ vim.lsp.config('ts_ls', {
   },
 })
 
-vim.lsp.config('eslint', {
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact',
-    'vue',
-    'svelte',
-    'astro',
-  },
-  root_markers = {
-    'eslint.config.js',
-    'eslint.config.mjs',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'package.json',
-    '.git',
-  },
-})
-
-vim.lsp.enable({ typescript_lsp, 'eslint' })
+vim.lsp.enable({ typescript_lsp })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -108,17 +83,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- Optional ESLint fix-all on save. Disabled by default to keep edits explicit.
--- Uncomment if you want ESLint fixes to run before saving JS/TS files.
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
---   callback = function()
---     vim.lsp.buf.code_action({
---       context = {
---         only = { 'source.fixAll.eslint' },
---         diagnostics = {},
---       },
---       apply = true,
---     })
---   end,
--- })

@@ -16,7 +16,48 @@ end
 
 require('mini.ai').setup({ n_lines = 1000 })
 require('mini.surround').setup({ n_lines = 1000 })
-require('mini.pick').setup()
+
+local mini_pick = require('mini.pick')
+
+local show_with_short_grep_paths = function(buf_id, items, query)
+  local displayed_items = vim.tbl_map(function(item)
+    if type(item) ~= 'string' then
+      return item
+    end
+
+    local path, line, column, text = item:match('^(.-):(%d+):(%d+):(.*)$')
+    if path == nil then
+      return item
+    end
+
+    return vim.fn.pathshorten(path) .. ':' .. line .. ':' .. column .. ':' .. text
+  end, items)
+
+  mini_pick.default_show(buf_id, displayed_items, query)
+end
+
+mini_pick.setup({
+  source = {
+    show = show_with_short_grep_paths,
+  },
+  window = {
+    config = function()
+      local height = math.floor(0.618 * vim.o.lines)
+
+      return {
+        anchor = 'NW',
+        height = height,
+        width = vim.o.columns - 2,
+        row = math.max(0, vim.o.lines - height - 2),
+        col = 1,
+      }
+    end,
+  },
+})
+
+-- mini.pick uses ripgrep's own configuration for grep options.
+vim.env.RIPGREP_CONFIG_PATH = vim.fn.stdpath('config') .. '/ripgreprc'
+
 require('mini.git').setup()
 
 -- Git change markers ---------------------------------------------------------

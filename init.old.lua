@@ -80,10 +80,10 @@ vim.keymap.set('x', 'v', function()
 end)
 
 
--- TypeScript + ESLint LSP ----------------------------------------------------
--- Install the servers outside Neovim, for example:
---   npm install -g typescript typescript-language-server vscode-langservers-extracted
--- or add them to your project devDependencies.
+-- TypeScript LSP -------------------------------------------------------------
+-- Install the server outside Neovim, for example:
+--   npm install -g typescript typescript-language-server
+-- or add it to your project devDependencies.
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -109,34 +109,7 @@ vim.lsp.config('ts_ls', {
   },
 })
 
-vim.lsp.config('eslint', {
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact',
-    'vue',
-    'svelte',
-    'astro',
-  },
-  root_markers = {
-    'eslint.config.js',
-    'eslint.config.mjs',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'package.json',
-    '.git',
-  },
-})
-
-vim.lsp.enable({ 'ts_ls', 'eslint' })
+vim.lsp.enable({ 'ts_ls' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -218,20 +191,6 @@ vim.keymap.set('n', '<leader>dB', '<cmd>DiagnosticsBuffer<cr>', {
   desc = 'Diagnostics to yankable buffer',
 })
 
--- Optional ESLint fix-all on save. Disabled by default to keep edits explicit.
--- Uncomment if you want ESLint fixes to run before saving JS/TS files.
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
---   callback = function()
---     vim.lsp.buf.code_action({
---       context = {
---         only = { 'source.fixAll.eslint' },
---         diagnostics = {},
---       },
---       apply = true,
---     })
---   end,
--- })
 
 -- diagnostics with error messages
 

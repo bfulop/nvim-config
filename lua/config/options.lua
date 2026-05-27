@@ -1,5 +1,5 @@
 -- Line numbers ----------------------------------------------------------------
-vim.opt.number = true
+vim.opt.number = false
 vim.opt.relativenumber = false
 
 vim.o.ignorecase = true
